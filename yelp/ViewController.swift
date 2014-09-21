@@ -13,9 +13,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     var client: YelpClient!
     
+
     @IBOutlet weak var searchBar: UISearchBar!
     
     var results: [NSDictionary] = [NSDictionary]()
+    
+    @IBAction func hideKeyboard(sender: AnyObject) {
+        searchBar.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         client.searchWithTerm(term, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             MBProgressHUD.hideHUDForView(self.view, animated: true)
             println(response)
-            var object = NSJSONSerialization.JSONObjectWithData(response as NSData, options: nil, error: nil) as NSDictionary
-            println(object)
-            self.results = object["businesses"] as [NSDictionary]
+            self.results = response["businesses"] as [NSDictionary]
             self.tableView.reloadData()
             
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
@@ -60,7 +63,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("ResultCell") as ResultCell
-        
+        var result = results[indexPath.row]
+        cell.resultName.text = result["name"] as NSString!
+        var location = result["location"] as NSDictionary!
+        var streetAddress = location["address"] as NSString!
+        var city = location["city"] as NSString!
+        cell.resultAddress.text = "\(streetAddress), \(city)"
         return cell
     }
 

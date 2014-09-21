@@ -95,12 +95,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="rlR-Vs-1Ma" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="Itt-Lj-pR6"/>
                             <constraint firstItem="rlR-Vs-1Ma" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="LEy-TT-nZW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rlR-Vs-1Ma" secondAttribute="trailing" constant="-16" id="fwg-90-OX7"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="rlR-Vs-1Ma" secondAttribute="bottom" id="fxN-Mi-p00"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="uUq-gZ-sSM" appends="YES" id="KWz-sj-ve0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="AvJ-fN-f0c">
                         <nil key="title"/>
@@ -126,6 +130,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="uUq-gZ-sSM">
+                    <connections>
+                        <action selector="hideKeyboard:" destination="vXZ-lx-hvc" id="R4s-Ll-b5A"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="935" y="126"/>
         </scene>
