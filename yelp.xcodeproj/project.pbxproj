@@ -16,6 +16,8 @@
 		8340325E19CDFC67008714B6 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8340325D19CDFC67008714B6 /* YelpClient.swift */; };
 		8340326419CE00C5008714B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8340326319CE00C5008714B6 /* Constants.swift */; };
 		835DEB7E19CE372B007EDBE3 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835DEB7D19CE372B007EDBE3 /* ResultCell.swift */; };
+		83AFD79219D122D0006056B2 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AFD79119D122D0006056B2 /* FiltersViewController.swift */; };
+		83AFD79619D135A5006056B2 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AFD79519D135A5006056B2 /* FilterCell.swift */; };
 		E9C78B688C5B405981B1A29A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D936D39969D46D2B9AB6440 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +48,8 @@
 		8340326019CDFFC5008714B6 /* yelp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yelp-Bridging-Header.h"; sourceTree = "<group>"; };
 		8340326319CE00C5008714B6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		835DEB7D19CE372B007EDBE3 /* ResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
+		83AFD79119D122D0006056B2 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		83AFD79519D135A5006056B2 /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 				8340326019CDFFC5008714B6 /* yelp-Bridging-Header.h */,
 				8340326319CE00C5008714B6 /* Constants.swift */,
 				835DEB7D19CE372B007EDBE3 /* ResultCell.swift */,
+				83AFD79519D135A5006056B2 /* FilterCell.swift */,
 			);
 			path = yelp;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				8340323D19CDFA2D008714B6 /* ViewController.swift */,
+				83AFD79119D122D0006056B2 /* FiltersViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -288,10 +294,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83AFD79619D135A5006056B2 /* FilterCell.swift in Sources */,
 				8340323E19CDFA2D008714B6 /* ViewController.swift in Sources */,
 				8340325E19CDFC67008714B6 /* YelpClient.swift in Sources */,
 				8340323C19CDFA2D008714B6 /* AppDelegate.swift in Sources */,
 				835DEB7E19CE372B007EDBE3 /* ResultCell.swift in Sources */,
+				83AFD79219D122D0006056B2 /* FiltersViewController.swift in Sources */,
 				8340326419CE00C5008714B6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

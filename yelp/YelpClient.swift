@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 class YelpClient: BDBOAuth1RequestOperationManager {
     var accessToken: String!
     var accessSecret: String!
+    var geoCoder = CLGeocoder()
+    var city = "San Jose"
+    var location: CLLocation!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,8 +32,12 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     
     func searchWithTerm(term: String, success: (AFHTTPRequestOperation!, AnyObject!) -> Void, failure: (AFHTTPRequestOperation!, NSError!) -> Void) -> AFHTTPRequestOperation! {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
-        var parameters = ["term": term, "location": "San Francisco"]
+        var parameters = ["term": term, "location": city]
+        if location != nil {
+            parameters["cll"] = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+        }
         return self.GET("search", parameters: parameters, success: success, failure: failure)
+        
     }
     
 }

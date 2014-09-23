@@ -3,5 +3,6 @@
 //
 
 #import "NSDictionary+BDBOAuth1Manager.h"
+#import "UIImageView+AFNetworking.h"
 #import "BDBOAuth1RequestOperationManager.h"
 #import "MBProgressHUD.h"

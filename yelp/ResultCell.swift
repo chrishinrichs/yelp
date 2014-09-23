@@ -12,7 +12,6 @@ class ResultCell: UITableViewCell {
 
     @IBOutlet weak var resultDescription: UILabel!
     @IBOutlet weak var resultAddress: UILabel!
-    @IBOutlet weak var resultCost: UILabel!
     @IBOutlet weak var resultNumReviews: UILabel!
     @IBOutlet weak var resultName: UILabel!
     @IBOutlet weak var resultImage: UIImageView!
