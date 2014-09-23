@@ -18,9 +18,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var delegate: FiltersViewDelegate!
     
     var isExpanded = [Int: Bool]()
-    let sections = ["Distance", "Category"]
-    let sectionData = ["Distance": [
-        "Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"], "Category": ["All", "Thai", "Barbeque", "Chinese", "French"]]
+    let sections = ["Sort", "Distance", "Category", "Deals"]
+    let sectionData = ["Sort": ["Best Match", "Distance", "Highest Rated"], "Distance": [
+        "Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"], "Category": ["All", "Thai", "Barbeque", "Chinese", "French"], "Deals": ["Offering a Deal"]]
     var selectedFilters = [String: String]()
     
     
@@ -50,7 +50,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isExpanded[section] != nil {
+        let sec = sections[section]
+        
+        if sec != "Deals" && isExpanded[section] != nil {
             if isExpanded[section]! {
                 let sec = sections[section]
                 let secData = sectionData[sec]!
@@ -64,11 +66,12 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let sec = sections[section]
         return 20.0
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return sections.count
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -84,14 +87,28 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         var cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
         var sec = sections[indexPath.section]
         var secData = sectionData[sec]!
-        if (isExpanded[indexPath.section] == nil || isExpanded[indexPath.section] == false) && selectedFilters[sec] != nil {
+        if sec != "Deals" {
             
-            cell.filterLabel.text = "\(selectedFilters[sec]!)"
+            if (isExpanded[indexPath.section] == nil || isExpanded[indexPath.section] == false) && selectedFilters[sec] != nil {
             
+                cell.filterLabel.text = "\(selectedFilters[sec]!)"
+            
+            } else {
+                cell.filterLabel.text = "\(secData[indexPath.row])"
+            }
         } else {
             cell.filterLabel.text = "\(secData[indexPath.row])"
+            cell.toggleSwitch.hidden = false
+            if selectedFilters[sec] == "true" {
+                cell.toggleSwitch.selected = true
+            }
+            cell.toggleSwitch.addTarget(self, action: "toggleDeals:", forControlEvents: UIControlEvents.ValueChanged)
         }
         return cell
+    }
+    
+    func toggleDeals(sender: UISwitch) {
+        selectedFilters["Deals"] = "\(sender.on)"
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -101,21 +118,24 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let sectionNum = indexPath.section
         let rowNum = indexPath.row
-        if isExpanded[sectionNum] != nil {
-            isExpanded[sectionNum] = !isExpanded[sectionNum]!
-            if isExpanded[sectionNum] == false {
-                // Update to the selected index
-                var sectionName = sections[sectionNum]
-                var data = sectionData[sectionName]!
-                var newVal = data[rowNum]
-                selectedFilters[sectionName] = newVal
+        let sectionName = sections[sectionNum]
+        if sectionName != "Deals" {
+            if isExpanded[sectionNum] != nil {
+                isExpanded[sectionNum] = !isExpanded[sectionNum]!
+                if isExpanded[sectionNum] == false {
+                    // Update to the selected index
+                    var data = sectionData[sectionName]!
+                    var newVal = data[rowNum]
+                    selectedFilters[sectionName] = newVal
+                }
+            } else {
+                isExpanded[sectionNum] = true
             }
-        } else {
-            isExpanded[sectionNum] = true
+            tableView.reloadSections(NSIndexSet(index: sectionNum), withRowAnimation: UITableViewRowAnimation.Fade)
         }
-        tableView.reloadSections(NSIndexSet(index: sectionNum), withRowAnimation: UITableViewRowAnimation.Fade)
-
     }
+    
+    
     
     /*
     // MARK: - Navigation

@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var client: YelpClient!
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
-    var currentSearchTerm = "Thai"
+    var currentSearchTerm = ""
     var searchBar: UISearchBar!
     var activeFilters: [String: String] = [String: String]()
     var results: [NSDictionary] = [NSDictionary]()
@@ -148,7 +148,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     var placemark = placemarks[0] as CLPlacemark
                     self.client.city = placemark.locality
                 }
-                self.search(self.currentSearchTerm)
+                // self.search(self.currentSearchTerm)
             })
             locationManager.stopUpdatingLocation()
         }

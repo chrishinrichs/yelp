@@ -11,6 +11,7 @@ import CoreLocation
 
 let distanceMapping = ["0.3 miles": 483, "1 mile": 1609, "5 miles": 8047, "20 miles": 32187]
 let categoryMapping = ["Thai": "thai", "Barbeque": "bbq", "Chinese": "chinese", "French": "french"]
+let sortMapping = ["Best Match": 0, "Highest Rated": 2, "Distance": 1]
 
 
 class YelpClient: BDBOAuth1RequestOperationManager {
@@ -44,12 +45,18 @@ class YelpClient: BDBOAuth1RequestOperationManager {
             switch (key) {
                 case "Category":
                     if value != "All" {
-                        parameters["category_filter"] = categoryMapping[value]
+                        parameters["category_filter"] = categoryMapping[value]!
                     }
                 case "Distance":
                     if value != "Auto" {
                         parameters["radius_filter"] = "\(distanceMapping[value]!)"
                     }
+                case "Deals":
+                    if value != "false" {
+                        parameters["deals_filter"] = value
+                    }
+                case "Sort":
+                    parameters["sort"] = "\(sortMapping[value]!)"
                 default:
                     println("Unknown filter")
             }

@@ -12,6 +12,7 @@ class FilterCell: UITableViewCell {
 
     @IBOutlet weak var filterLabel: UILabel!
     
+    @IBOutlet weak var toggleSwitch: UISwitch!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
