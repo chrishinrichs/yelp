@@ -169,6 +169,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         search(currentSearchTerm)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
     /* func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         var currentCell = tableView.cellForRowAtIndexPath(indexPath) as ResultCell
         var cellHeight = currentCell.resultName.bounds.size.height
