@@ -175,11 +175,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="03h-ob-Qud" id="gMI-JL-IIB">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6l-zo-kne">
-                                                    <rect key="frame" x="8" y="8" width="384" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="4Ts-Vh-Qep"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Auto" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6l-zo-kne">
+                                                    <rect key="frame" x="8" y="8" width="36" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -187,7 +184,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="y6l-zo-kne" firstAttribute="leading" secondItem="gMI-JL-IIB" secondAttribute="leadingMargin" id="4Fo-P1-zgM"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="y6l-zo-kne" secondAttribute="trailing" constant="200" id="VCR-Ls-S0o"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="y6l-zo-kne" secondAttribute="trailing" constant="9" id="VCR-Ls-S0o"/>
                                                 <constraint firstItem="y6l-zo-kne" firstAttribute="top" secondItem="gMI-JL-IIB" secondAttribute="topMargin" id="b7L-0U-MO9"/>
                                             </constraints>
                                         </tableViewCellContentView>

@@ -33,6 +33,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,20 +62,22 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             return 1
         }
     }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20.0
+    }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sections.count
+        return 2
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        headerView.backgroundColor = UIColor.lightGrayColor()
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 20))
-        label.font = UIFont.systemFontOfSize(22)
+        label.font = UIFont.systemFontOfSize(18)
         label.text = "\(sections[section])"
         label.textColor = UIColor.blackColor()
-        headerView.addSubview(label)
-        return headerView
+
+        return label
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -88,6 +92,10 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.filterLabel.text = "\(secData[indexPath.row])"
         }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
