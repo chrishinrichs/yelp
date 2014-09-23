@@ -17,7 +17,12 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     var delegate: FiltersViewDelegate!
     
-    var expandedState = [Int: Bool]()
+    var isExpanded = [Int: Bool]()
+    let sections = ["Distance", "Category"]
+    let sectionData = ["Distance": [
+        "Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"], "Category": ["All", "Restaurants", "Doctors", "Dentists"]]
+    var selectedFilters = [String: String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +48,65 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if isExpanded[section] != nil {
+            if isExpanded[section]! {
+                let sec = sections[section]
+                let secData = sectionData[sec]!
+                return secData.count
+            } else {
+                return 1
+            }
+        } else {
+            return 1
+        }
     }
 
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        headerView.backgroundColor = UIColor.lightGrayColor()
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 20))
+        label.font = UIFont.systemFontOfSize(22)
+        label.text = "\(sections[section])"
+        label.textColor = UIColor.blackColor()
+        headerView.addSubview(label)
+        return headerView
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
-        cell.filterLabel.text = "Cell \(indexPath.row)"
+        var sec = sections[indexPath.section]
+        var secData = sectionData[sec]!
+        if (isExpanded[indexPath.section] == nil || isExpanded[indexPath.section] == false) && selectedFilters[sec] != nil {
+            
+            cell.filterLabel.text = "\(selectedFilters[sec]!)"
+            
+        } else {
+            cell.filterLabel.text = "\(secData[indexPath.row])"
+        }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let sectionNum = indexPath.section
+        let rowNum = indexPath.row
+        if isExpanded[sectionNum] != nil {
+            isExpanded[sectionNum] = !isExpanded[sectionNum]!
+            if isExpanded[sectionNum] == false {
+                // Update to the selected index
+                var sectionName = sections[sectionNum]
+                var data = sectionData[sectionName]!
+                var newVal = data[rowNum]
+                selectedFilters[sectionName] = newVal
+            }
+        } else {
+            isExpanded[sectionNum] = true
+        }
+        tableView.reloadSections(NSIndexSet(index: sectionNum), withRowAnimation: UITableViewRowAnimation.Fade)
+
     }
     
     /*
