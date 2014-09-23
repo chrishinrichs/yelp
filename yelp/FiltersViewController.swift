@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FiltersViewDelegate {
-    func setFilters(filters: NSDictionary) -> Void
+    func setFilters(filters: [String: String]) -> Void
 }
 
 class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -20,7 +20,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var isExpanded = [Int: Bool]()
     let sections = ["Distance", "Category"]
     let sectionData = ["Distance": [
-        "Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"], "Category": ["All", "Restaurants", "Doctors", "Dentists"]]
+        "Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"], "Category": ["All", "Thai", "Barbeque", "Chinese", "French"]]
     var selectedFilters = [String: String]()
     
     
@@ -43,7 +43,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func applyFilters() {
     
         var filters: NSDictionary = [String: String]()
-        delegate.setFilters(filters)
+        delegate.setFilters(selectedFilters)
         navigationController?.popToRootViewControllerAnimated(true)
     }
     

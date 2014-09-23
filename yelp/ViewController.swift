@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var currentLocation: CLLocation!
     var currentSearchTerm = "Thai"
     var searchBar: UISearchBar!
-    
+    var activeFilters: [String: String] = [String: String]()
     var results: [NSDictionary] = [NSDictionary]()
     
     @IBAction func hideKeyboard(sender: AnyObject) {
@@ -54,8 +54,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func search(term: String) {
+        currentSearchTerm = term
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        client.searchWithTerm(term, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        client.searchWithTerm(term, filters: activeFilters, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             MBProgressHUD.hideHUDForView(self.view, animated: true)
             println(operation.request.URL.absoluteString)
             println(response)
@@ -70,6 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.endEditing(true)
+        self.activeFilters = [String: String]()
         search(searchBar.text)
     }
 
@@ -157,12 +159,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Pass the movie title to the details page
             var destination = segue.destinationViewController as FiltersViewController
             destination.delegate = self
+            destination.selectedFilters = self.activeFilters
             
         }
     }
     
-    func setFilters(filters: NSDictionary) {
-        println("Made it!")
+    func setFilters(filters: [String: String]) {
+        activeFilters = filters
+        search(currentSearchTerm)
     }
     
     /* func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
